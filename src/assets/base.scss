@@ -1,0 +1,72 @@
+@use 'sass:color';
+
+// Define SASS variables first
+$primary-red: hsl(14, 86%, 42%);
+// Using color.scale() instead of darken()
+$primary-red-dark: color.scale($primary-red, $lightness: -10%);
+
+/* semantic color variables for this project */
+:root {
+  --primary-red: #{$primary-red};
+  --primary-red-dark: #{$primary-red-dark};
+  --color-success: hsl(159, 69%, 38%);
+
+  --rose-50: hsl(20, 50%, 98%);
+  --rose-100: hsl(13, 31%, 94%);
+  --rose-300: hsl(14, 25%, 72%);
+  --rose-400: hsl(7, 20%, 60%);
+  --rose-500: hsl(12, 20%, 44%);
+  --rose-900: hsl(14, 65%, 9%);
+
+  --color-background: var(--rose-100);
+  --color-text: var(--rose-900);
+  --color-text-light: var(--rose-50);
+  --font-size-body: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: 'Red Hat Text', sans-serif;
+  font-style: normal;
+  font-size: var(--font-size-body);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Red Hat Text';
+  font-style: normal;
+  src: url('./fonts/RedHatText-VariableFont_wght.ttf') format('woff2');
+  line-height: 28px;
+}
