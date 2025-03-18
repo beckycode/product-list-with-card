@@ -6,6 +6,13 @@
       <p>Your added items will appear here</p>
     </article>
     <article v-else class="products">
+      <p class="order-total">
+        Order Total <span class="price accent">{{ price }}</span>
+      </p>
+      <div class="disclaimer">
+        <CarbonNeutralIcon />
+        <p>This is a <span class="accent">carbon-neutral</span> dellivery</p>
+      </div>
       <BaseButton label="Confirm Order" />
     </article>
   </section>
@@ -13,17 +20,27 @@
 
 <script>
 import BaseButton from './BaseButton.vue'
+import { useCart } from '@/stores/cart'
+import { mapState } from 'pinia'
+import { formatCurrency } from '@/utils/formatters'
+import CarbonNeutralIcon from '@/assets/images/icon-carbon-neutral.svg?component'
 
 export default {
   name: 'ShoppingCart',
   components: {
     BaseButton,
+    CarbonNeutralIcon,
   },
   data() {
-    return {
-      totalItems: 10,
-      cart: [],
-    }
+    return {}
+  },
+
+  computed: {
+    // Use mapState for both state and getters
+    ...mapState(useCart, ['cart', 'totalItems', 'orderTotal']),
+    price() {
+      return formatCurrency(this.orderTotal)
+    },
   },
 }
 </script>
@@ -36,6 +53,7 @@ export default {
   height: max-content;
   border-radius: 10px;
   padding: 20px;
+  margin-top: 16px;
 
   .title {
     color: var(--primary-red);
@@ -52,6 +70,26 @@ export default {
     }
     p {
       margin-top: 20px;
+    }
+  }
+
+  .disclaimer {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    margin: 20px 0;
+    width: 100%;
+    background-color: var(--color-background);
+  }
+
+  .order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+
+    .price {
+      font-size: 20px;
     }
   }
 }

@@ -1,10 +1,17 @@
 <template>
   <article class="card">
     <div class="card-header">
-      <div class="card-image">
+      <div class="card-image" :class="{ selected: isInCart }">
         <img :src="getImageURL" :alt="dessert.name" />
       </div>
-      <ButtonActions class="button-add" />
+      <ButtonActions
+        class="button-add"
+        :dessert="dessert"
+        :isInCart="isInCart"
+        @addToCart="addToCart"
+        @increment="increment"
+        @decrement="decrement"
+      />
     </div>
 
     <div class="card-content">
@@ -18,6 +25,8 @@
 <script>
 import { formatCurrency } from '@/utils/formatters'
 import ButtonActions from './ButtonActions.vue'
+import { useCart } from '@/stores/cart'
+import { mapActions, mapState } from 'pinia'
 
 export default {
   name: 'DessertCard',
@@ -31,11 +40,29 @@ export default {
     },
   },
   computed: {
+    ...mapState(useCart, ['cart']),
     getImageURL() {
       return this.dessert.image.desktop
     },
     price() {
       return formatCurrency(this.dessert.price)
+    },
+    isInCart() {
+      return this.cart.some((item) => item.id === this.dessert.id)
+    },
+  },
+  methods: {
+    ...mapActions(useCart, ['addItem', 'incrementItem', 'decrementItem']),
+    addToCart() {
+      this.addItem(this.dessert)
+    },
+    increment() {
+      console.log('increment')
+
+      this.incrementItem(this.dessert)
+    },
+    decrement() {
+      this.decrementItem(this.dessert)
     },
   },
 }
@@ -61,6 +88,7 @@ export default {
     height: 100%;
     overflow: hidden;
     border-radius: 10px;
+
     img {
       width: 100%;
       height: 100%;
@@ -82,6 +110,10 @@ export default {
 
   .button-add {
     margin-top: -20px;
+  }
+
+  .selected {
+    border: 3px solid var(--primary-red);
   }
 }
 </style>

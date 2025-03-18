@@ -1,16 +1,16 @@
 <template>
-  <div v-if="!isInCart" class="button">
+  <div v-if="!isInCart" class="button" @click="$emit('addToCart')">
     <div class="icon-cart">
       <CartIcon />
     </div>
     <p class="button-label">Add to Cart</p>
   </div>
   <div v-else class="button button-selected">
-    <div class="action">
+    <div class="action" @click="$emit('decrement')">
       <DecrementIcon />
     </div>
     {{ totalItemCart }}
-    <div class="action">
+    <div class="action" @click="$emit('increment')">
       <IncrementIcon />
     </div>
   </div>
@@ -20,6 +20,8 @@
 import CartIcon from '@/assets/images/icon-add-to-cart.svg?component'
 import IncrementIcon from '@/assets/images/icon-increment-quantity.svg?component'
 import DecrementIcon from '@/assets/images/icon-decrement-quantity.svg?component'
+import { useCart } from '@/stores/cart'
+import { mapState } from 'pinia'
 
 export default {
   name: 'ButtonActions',
@@ -28,13 +30,20 @@ export default {
     IncrementIcon,
     DecrementIcon,
   },
-  computed: {
-    isInCart() {
-      return true
-      // return this.cart.some((item) => item.id === this.dessert.id)
+  props: {
+    dessert: {
+      type: Object,
+      required: true,
     },
+    isInCart: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    ...mapState(useCart, ['cart']),
     totalItemCart() {
-      return 3
+      return this.cart.find((item) => item.id === this.dessert.id).quantity
     },
   },
 }
@@ -75,6 +84,7 @@ export default {
     align-items: flex-start;
     padding: 10px 15px;
     color: var(--color-text-light);
+    border: 1px solid var(--primary-red);
 
     &:hover {
       color: var(--color-text-light);
@@ -83,11 +93,11 @@ export default {
     .action {
       border: 2px solid var(--rose-50);
       border-radius: 12px;
-      padding: 0 6px;
-
-      // &:first-child {
-      //   padding: 7px 3px;
-      // }
+      padding: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease;
 
       &:hover {
         background-color: var(--color-background);
@@ -95,19 +105,11 @@ export default {
           fill: var(--primary-red);
         }
       }
+
+      &:first-child {
+        padding: 8px 5px;
+      }
     }
   }
 }
-
-// .action {
-//   svg {
-//     fill: var(--primary-red);
-//     transition: fill 0.2s ease;
-
-//     &:hover {
-//       fill: var(--primary-red-dark);
-//       cursor: pointer;
-//     }
-//   }
-// }
 </style>
