@@ -2,15 +2,16 @@
   <section class="shopping-cart">
     <h3 class="title">Your cart ({{ totalItems }})</h3>
     <article v-if="totalItems === 0" class="empty-cart">
-      <img src="./../assets/images/illustration-empty-cart.svg" alt="Empty cart" />
+      <EmptyCartIcon />
       <p>Your added items will appear here</p>
     </article>
     <article v-else class="products">
+      <ShoppingCartItem v-for="cartItem in cart" :key="cartItem.id" :item="cartItem" />
       <p class="order-total">
         Order Total <span class="price accent">{{ price }}</span>
       </p>
       <div class="disclaimer">
-        <CarbonNeutralIcon />
+        <CarbonNeutralIcon class="icon" />
         <p>This is a <span class="accent">carbon-neutral</span> dellivery</p>
       </div>
       <BaseButton label="Confirm Order" />
@@ -20,23 +21,26 @@
 
 <script>
 import BaseButton from './BaseButton.vue'
+import ShoppingCartItem from './ShoppingCartItem.vue'
 import { useCart } from '@/stores/cart'
 import { mapState } from 'pinia'
 import { formatCurrency } from '@/utils/formatters'
 import CarbonNeutralIcon from '@/assets/images/icon-carbon-neutral.svg?component'
+import EmptyCartIcon from '@/assets/images/illustration-empty-cart.svg?component'
 
 export default {
   name: 'ShoppingCart',
   components: {
     BaseButton,
+    ShoppingCartItem,
     CarbonNeutralIcon,
+    EmptyCartIcon,
   },
   data() {
     return {}
   },
 
   computed: {
-    // Use mapState for both state and getters
     ...mapState(useCart, ['cart', 'totalItems', 'orderTotal']),
     price() {
       return formatCurrency(this.orderTotal)
@@ -52,7 +56,7 @@ export default {
   min-height: 250px;
   height: max-content;
   border-radius: 10px;
-  padding: 20px;
+  padding: 25px;
   margin-top: 16px;
 
   .title {
@@ -77,16 +81,20 @@ export default {
     display: flex;
     justify-content: center;
     padding: 15px;
-    margin: 20px 0;
+    margin: 25px 0;
     width: 100%;
     background-color: var(--color-background);
+
+    .icon {
+      margin-right: 5px;
+    }
   }
 
   .order-total {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin: 25px 0;
 
     .price {
       font-size: 20px;

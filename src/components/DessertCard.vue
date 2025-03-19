@@ -70,7 +70,7 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  min-height: 200px;
+  min-height: 180px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
