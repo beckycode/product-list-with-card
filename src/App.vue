@@ -22,5 +22,15 @@ main {
   grid-template-columns: 2fr 1fr;
   gap: 1rem;
   padding: 1rem;
+
+  @media (max-width: 920px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 540px) {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
 }
 </style>

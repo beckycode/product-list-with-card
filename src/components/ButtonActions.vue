@@ -63,6 +63,10 @@ export default {
   cursor: pointer;
   transition: all 0.3s ease;
 
+  @media (max-width: 920px) {
+    width: 50%;
+  }
+
   &:hover {
     color: var(--primary-red);
     cursor: pointer;

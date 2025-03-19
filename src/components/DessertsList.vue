@@ -33,6 +33,11 @@ export default {
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     gap: 2rem;
     margin-top: 10px;
+
+    @media (max-width: 920px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 </style>

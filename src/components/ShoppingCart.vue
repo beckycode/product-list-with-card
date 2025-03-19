@@ -59,8 +59,16 @@ export default {
   padding: 25px;
   margin-top: 16px;
 
+  @media (max-width: 540px) {
+    max-width: 100%;
+  }
+
   .title {
     color: var(--primary-red);
+
+    @media (max-width: 920px) {
+      font-size: 26px;
+    }
   }
 
   .empty-cart {
@@ -98,6 +106,10 @@ export default {
 
     .price {
       font-size: 20px;
+
+      @media (max-width: 920px) {
+        font-size: 26px;
+      }
     }
   }
 }

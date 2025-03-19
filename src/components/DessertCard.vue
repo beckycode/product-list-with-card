@@ -73,7 +73,6 @@ export default {
   min-height: 180px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: flex-start;
 
   &-header {
@@ -88,11 +87,23 @@ export default {
     height: 100%;
     overflow: hidden;
     border-radius: 10px;
+    @media (max-width: 1024px) {
+      max-height: 220px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      @media (max-width: 1440px) {
+        object-fit: contain;
+      }
+      @media (max-width: 920px) {
+        object-fit: cover;
+      }
     }
   }
 
