@@ -14,8 +14,9 @@
         <CarbonNeutralIcon class="icon" />
         <p>This is a <span class="accent">carbon-neutral</span> dellivery</p>
       </div>
-      <BaseButton label="Confirm Order" />
+      <BaseButton label="Confirm Order" @click="showModal = true" />
     </article>
+    <OrderModal v-if="showModal" @close="closeModal" @closeOnly="showModal = false"></OrderModal>
   </section>
 </template>
 
@@ -23,10 +24,11 @@
 import BaseButton from './BaseButton.vue'
 import ShoppingCartItem from './ShoppingCartItem.vue'
 import { useCart } from '@/stores/cart'
-import { mapState } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import { formatCurrency } from '@/utils/formatters'
 import CarbonNeutralIcon from '@/assets/images/icon-carbon-neutral.svg?component'
 import EmptyCartIcon from '@/assets/images/illustration-empty-cart.svg?component'
+import OrderModal from './OrderModal.vue'
 
 export default {
   name: 'ShoppingCart',
@@ -35,15 +37,26 @@ export default {
     ShoppingCartItem,
     CarbonNeutralIcon,
     EmptyCartIcon,
+    OrderModal,
   },
   data() {
-    return {}
+    return {
+      showModal: false,
+    }
   },
 
   computed: {
     ...mapState(useCart, ['cart', 'totalItems', 'orderTotal']),
     price() {
       return formatCurrency(this.orderTotal)
+    },
+  },
+
+  methods: {
+    ...mapActions(useCart, ['resetCart']),
+    closeModal() {
+      this.showModal = false
+      this.resetCart()
     },
   },
 }

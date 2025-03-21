@@ -38,6 +38,10 @@ export const useCart = defineStore('cart', {
       this.cart = [...this.cart.filter((cartItem) => cartItem.id !== itemId)]
       this.saveToStorage()
     },
+    resetCart() {
+      this.cart = []
+      this.saveToStorage()
+    },
   },
   getters: {
     totalItems: (state) => {

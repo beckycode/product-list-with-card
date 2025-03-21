@@ -62,28 +62,10 @@ export default {
       min-width: 170px;
     }
 
-    &-title {
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
     &-values {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-    }
-
-    &-quantity {
-      color: var(--primary-red);
-      font-weight: 600;
-    }
-
-    &-price {
-      color: var(--rose-400);
-    }
-    &-total {
-      color: var(--rose-500);
-      font-weight: 600;
     }
 
     &-icon {
