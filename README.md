@@ -57,7 +57,9 @@ Users should be able to:
 ### What I learned
 
 I enjoyed working in the structure of this projects. Thinking what's the best approach with different components and css, sass files. Also how to work with SVG files.
+
 The benefits of working Flexbox and CSS Grid at the same time it's definitely useful and neccesary.
+
 This project helped to brush up my skills with the different technologies that I use daily. Most of the times my work is based in build components and style them but not to structure a complete project. It was an enjoyable experience since the planning phase until the deployment in Netlify.
 
 ### Continued development
