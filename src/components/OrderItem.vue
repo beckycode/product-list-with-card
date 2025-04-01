@@ -50,6 +50,11 @@ export default {
   flex-direction: column;
   background-color: var(--color-background);
 
+  &:first-child {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
   &-item {
     display: flex;
     flex-direction: row;
@@ -67,10 +72,16 @@ export default {
   }
 
   &-image {
-    width: 56px;
+    min-width: 56px; // Changed from width to min-width
+    width: 56px; // Keep fixed width
+    height: 56px; // Add fixed height
+    border-radius: 5px;
+    overflow: hidden;
 
     img {
       width: 100%;
+      height: 100%;
+      object-fit: cover; // Ensure image covers the fixed space
     }
   }
 
@@ -81,6 +92,23 @@ export default {
     align-items: flex-start;
     margin-left: 20px;
     flex-basis: 280px;
+
+    @media (max-width: 920px) {
+      flex-basis: auto;
+      flex-grow: 1;
+      min-width: 0; // Important for text-overflow to work
+    }
+
+    .item-title {
+      width: 100%; // Needed for ellipsis
+      text-align: left;
+
+      @media (max-width: 920px) {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   }
 
   .item-quantity {

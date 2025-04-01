@@ -75,6 +75,11 @@ export default {
   max-height: calc(100vh - 4rem);
   overflow-y: auto;
 
+  @media (max-width: 920px) {
+    width: 100%;
+    padding: 25px;
+  }
+
   &-header {
     display: flex;
     flex-direction: column;
@@ -97,6 +102,8 @@ export default {
     justify-content: space-between;
     background-color: var(--color-background);
     padding: 30px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 
     .price {
       font-size: 20px;
