@@ -33,7 +33,9 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Desktop](https://github.com/user-attachments/assets/ead20e4a-27c8-4a8b-b37b-fcff6f9f97b8)
+![Mobile](https://github.com/user-attachments/assets/6b9ec064-132e-4068-948f-1500c6d08e05)
+
 
 ### Links
 
