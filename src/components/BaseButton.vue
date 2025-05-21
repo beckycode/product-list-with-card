@@ -8,7 +8,6 @@ export default {
   props: {
     label: {
       type: String,
-      required: true,
       default: 'Add to Cart',
     },
   },
