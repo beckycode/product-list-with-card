@@ -57,8 +57,6 @@ export default {
       this.addItem(this.dessert)
     },
     increment() {
-      console.log('increment')
-
       this.incrementItem(this.dessert)
     },
     decrement() {

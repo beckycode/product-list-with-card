@@ -43,7 +43,7 @@ export default {
   computed: {
     ...mapState(useCart, ['cart']),
     totalItemCart() {
-      return this.cart.find((item) => item.id === this.dessert.id).quantity
+      return this.cart.find((item) => item.id === this.dessert.id)?.quantity
     },
   },
 }
